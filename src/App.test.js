@@ -1,8 +1,17 @@
-import { render, screen } from '@testing-library/react';
 import App from './App';
+import { shallow } from 'enzyme';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+describe('App.js ', () => {
+  let wrapper
+
+  beforeEach(() => {
+    wrapper = shallow(<App />)
+  })
+
+  test('render Header Component with title "All recipes"', () => {
+    const header = wrapper.find('Header')
+    expect(header).toHaveLength(1)
+  })
+})
+
+
