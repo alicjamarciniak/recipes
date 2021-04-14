@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "history": "^5.0.0",
     "json-server": "^0.16.3",
+    "material-ui-image": "^3.3.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
