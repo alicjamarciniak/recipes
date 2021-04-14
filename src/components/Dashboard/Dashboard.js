@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import RecipeCard from './../RecipeCard/RecipeCard';
+import * as Constants from './../../constants';
+import axios from 'axios';
 
 const useStyles = makeStyles({
   dashboardContainer: {
@@ -15,6 +17,19 @@ const useStyles = makeStyles({
 const Dashboard = () => {
   const classes = useStyles();
   const theme = useTheme();
+  const [data, setData] = useState({ recipes: [] });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const queryResult = await axios.post(Constants.GRAPHQL_API, {
+        query: Constants.GET_RECIPES_QUERY,
+      });
+      const result = queryResult.data.data;
+      setData({ recipes: result.recipes });
+    };
+
+    fetchData();
+  });
 
   const smMatch = useMediaQuery(theme.breakpoints.up('sm'));
   const mdMatch = useMediaQuery(theme.breakpoints.up('md'));
